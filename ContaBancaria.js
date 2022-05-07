@@ -8,7 +8,7 @@ class ContaBancaria {
 	}
 
 	get saldo () {
-		return saldo;
+		return this._saldo;
 	}
 
 	set saldo (saldo) {
@@ -24,7 +24,7 @@ class ContaBancaria {
 		}
 	}
 
-	deposito (valorDeposito) {
+	depositar (valorDeposito) {
 		this._saldo = this._saldo + valorDeposito;
 		return 'Deposito realizado com sucesso. Novo saldo é de: ' + this._saldo;
 	}
@@ -33,33 +33,30 @@ class ContaBancaria {
 
 class ContaCorrente extends ContaBancaria {
 	
-	constructor (agencia, numero, cartaoCredito) {
-		super(agencia, numero);
-		this.tipo = 'Conta Corrente';
+	constructor (agencia, numero, saldo, cartaoCredito) {
+		super(agencia, numero, 'Conta Corrente', saldo);
 		this._cartaoCredito = cartaoCredito;
 	}
 
 	get cartaoCredito () {
-		return this.cartaoCredito;
+		return this._cartaoCredito;
 	}
 
-	set cartaoCredito (cartaoCredito) {
-		this._cartaoCredito = cartaoCredito;
+	set cartaoCredito (valorCartao) {
+		this._cartaoCredito = valorCartao;
 	}
 
 }
 
 class ContaPoupanca extends ContaBancaria {
-	constructor (agencia, numero, tipo) {
-		super(agencia, numero)
-		this.tipo = 'Poupança';
+	constructor (agencia, numero, saldo) {
+		super(agencia, numero, 'Poupança', saldo)
 	}
 }
 
 class ContaUniversitaria extends ContaBancaria {
-	constructor (agencia, numero, cartaoCredito) {
-		super(agencia, tipo);
-		this.tipo =  'Conta Universitária'
+	constructor (agencia, numero, saldo) {
+		super(agencia, numero, 'Conta Universitária', saldo);
 	}
 
 	saque (valorSaque) {
@@ -73,3 +70,6 @@ class ContaUniversitaria extends ContaBancaria {
 		}
 	}
 }
+
+
+let ct1 = new ContaCorrente('0001', '892739-1', 1200.40, '891273129');
